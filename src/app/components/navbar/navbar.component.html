@@ -1,0 +1,5 @@
+<div class="navbar">
+  <a class="nav-item" *ngFor="let user of users" (click)="selectUser(user.id)">
+    {{ user.name }}
+  </a>
+</div>
