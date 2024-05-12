@@ -1,27 +1,70 @@
-# VodafoneTask
+# Angular Task For Vodafone Technical Interview
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
+<img src="https://github.com/Shaban-Eissa/Vodafone-Angular-Task/assets/49924090/1e235306-f36d-4dcd-82bc-27093a062094" width="415" height="115" />
 
-## Development server
+Demo built with Angular for data-fetching and caching for api's with RxJS.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Table of Contents
 
-## Code scaffolding
+* [Features](#features)
+* [Demo](#demo)
+* [Installation](#installation)
+* [Technologies Used](#technologies-used)
+* [Contributing](#contributing)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+* **Fetching Dynamic Data:** Allow to fetch data based on the selected user.
+* **Caching:** Using RxJS to cache api's for future usage.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Demo
 
-## Running end-to-end tests
+<img src="https://github.com/Shaban-Eissa/Vodafone-Angular-Task/assets/49924090/01961e92-fca2-4be3-bb2e-3e4206e2d594" width="950" height="450" />
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+## Installation
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. **Clone the repository:**
+    
+    ```bash
+    git clone https://github.com/Shaban-Eissa/Vodafone-Angular-Task
+    ```
+    
+2. **Install dependencies:**
+    
+    ```bash
+    cd Vodafone-Angular-Task
+    npm install
+    ```
+
+3. **Run the application:**
+    
+    ```bash
+    ng serve
+    ```
+    
+    The application will be accessible at `http://localhost:4200`.
+
+
+## Technologies
+
+This project utilizes a stack of modern technologies for efficient development and optimal user experience:
+
+- Angular
+- RxJS
+- Sass
+- Json-Placeholder
+
+  
+## Contributing
+
+Contributions are welcome! Please follow these guidelines:
+
+1. Fork the repository.
+2. Create a new branch for your feature/bugfix: `git checkout -b feature-name`.
+3. Commit your changes: `git commit -m 'Add some feature'`.
+4. Push to the branch: `git push origin feature-name`.
+5. Open a pull request.
+   
