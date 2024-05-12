@@ -1,4 +1,12 @@
-<div class="post-container">
+<div class="spinner-container" *ngIf="isLoading">
+  <div class="spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+
+<div class="post-container" *ngIf="!isLoading">
   <div
     class="post-card"
     *ngFor="let post of posts"

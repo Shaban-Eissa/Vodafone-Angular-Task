@@ -1,5 +1,6 @@
 import { NgClass, NgFor, NgIf } from "@angular/common";
 import { Component } from "@angular/core";
+import { forkJoin } from 'rxjs';
 
 import { LimitCharactersPipe } from "../../pipes/limit-characters.pipe";
 import { PostService } from "../../services/Post/post-service.service";
@@ -18,6 +19,7 @@ export class PostsComponent {
   selectedPostId: number | null = null;
   selectedCardId: number | null = null;
   showComments = false;
+  isLoading = true;
 
   constructor(private postService: PostService) {}
 
@@ -26,11 +28,13 @@ export class PostsComponent {
   }
 
   loadPosts(userId: number) {
+    this.isLoading = true;
     this.postService.getPosts(userId).subscribe((posts) => {
       this.posts = posts;
       posts.forEach((post: any) => {
         this.postService.getUser(post.userId).subscribe((user) => {
           post.user = user;
+          this.isLoading = false;
         });
       });
     });
