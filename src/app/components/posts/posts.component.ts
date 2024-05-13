@@ -1,9 +1,10 @@
 import { NgClass, NgFor, NgIf } from "@angular/common";
 import { Component } from "@angular/core";
-import { forkJoin } from 'rxjs';
 
 import { LimitCharactersPipe } from "../../pipes/limit-characters.pipe";
 import { PostService } from "../../services/Post/post-service.service";
+
+import { postProfileImageURL, postBodyImageURL } from "../../utils/constants";
 
 @Component({
   selector: "app-posts",
@@ -14,6 +15,8 @@ import { PostService } from "../../services/Post/post-service.service";
 })
 export class PostsComponent {
   posts: any[] = [];
+  postProfileImageURL = postProfileImageURL;
+  postBodyImageURL = postBodyImageURL;
   comments: any[] = [];
   selectedPostComments: any[] = [];
   selectedPostId: number | null = null;
