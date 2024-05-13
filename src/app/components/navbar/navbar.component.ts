@@ -18,6 +18,10 @@ export class NavbarComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit() {
+    this.fetchUsers();
+  }
+
+  fetchUsers(): void {
     this.userService.getUsers().subscribe((data: TUser[]) => {
       this.users = data;
     });
