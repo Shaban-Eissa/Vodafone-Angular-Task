@@ -5,6 +5,7 @@ import { LimitCharactersPipe } from "../../pipes/limit-characters.pipe";
 import { PostService } from "../../services/Post/post-service.service";
 
 import { postProfileImageURL, postBodyImageURL } from "../../utils/constants";
+import { TComment, TPost, TUser } from "../../utils/types";
 
 @Component({
   selector: "app-posts",
@@ -14,10 +15,10 @@ import { postProfileImageURL, postBodyImageURL } from "../../utils/constants";
   styleUrl: "./posts.component.scss",
 })
 export class PostsComponent {
-  posts: any[] = [];
+  posts: TPost[] = [];
   postProfileImageURL = postProfileImageURL;
   postBodyImageURL = postBodyImageURL;
-  comments: any[] = [];
+  comments: TComment[] = [];
   selectedPostComments: any[] = [];
   selectedPostId: number | null = null;
   selectedCardId: number | null = null;
@@ -34,8 +35,8 @@ export class PostsComponent {
     this.isLoading = true;
     this.postService.getPosts(userId).subscribe((posts) => {
       this.posts = posts;
-      posts.forEach((post: any) => {
-        this.postService.getUser(post.userId).subscribe((user) => {
+      posts.forEach((post: TPost) => {
+        this.postService.getUser(post.userId).subscribe((user: TUser) => {
           post.user = user;
           this.isLoading = false;
         });

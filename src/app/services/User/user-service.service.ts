@@ -5,6 +5,7 @@ import { of } from "rxjs";
 import { shareReplay, tap } from "rxjs/operators";
 
 import { USERS_URL } from "../../utils/constants";
+import { TUser } from "../../utils/types";
 
 @Injectable({
   providedIn: "root",
@@ -12,7 +13,7 @@ import { USERS_URL } from "../../utils/constants";
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  users$ = this.http.get<any[]>(USERS_URL).pipe(
+  users$ = this.http.get<TUser[]>(USERS_URL).pipe(
     tap((users) => localStorage.setItem("users", JSON.stringify(users))),
     shareReplay(1)
   );
@@ -20,7 +21,7 @@ export class UserService {
   getUsers() {
     const users = localStorage.getItem("users");
     if (users) {
-      return of(JSON.parse(users));
+      return of(JSON.parse(users) as TUser[]);
     } else {
       return this.users$;
     }

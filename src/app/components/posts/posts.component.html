@@ -14,12 +14,12 @@
   >
     <div class="post-header">
       <div class="post-profile-image">
-        <img [src]="postProfileImageURL + post.user.id" alt="Profile" />
+        <img [src]="postProfileImageURL + post.user?.id" alt="Profile" />
       </div>
-      <h4>Posted by: {{ post.user.username }} ({{ post.user.email }})</h4>
+      <h4>Posted by: {{ post.user?.username }} ({{ post.user?.email }})</h4>
     </div>
     <div class="post-body">
-      <img [src]="postBodyImageURL + post.user.id" alt="Post" />
+      <img [src]="postBodyImageURL + post.user?.id" alt="Post" />
       <p>{{ post.body | limitCharacters : 100 }}</p>
     </div>
     <div class="post-footer">

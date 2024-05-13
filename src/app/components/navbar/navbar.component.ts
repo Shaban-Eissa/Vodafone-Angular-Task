@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { NgFor } from "@angular/common";
 
 import { UserService } from "../../services/User/user-service.service";
+import { TUser } from "../../utils/types";
 
 @Component({
   selector: "app-navbar",
@@ -11,13 +12,13 @@ import { UserService } from "../../services/User/user-service.service";
   styleUrl: "./navbar.component.scss",
 })
 export class NavbarComponent implements OnInit {
-  users: any[] = [];
+  users: TUser[] = [];
   @Output() userSelected = new EventEmitter<number>();
 
   constructor(private userService: UserService) {}
 
   ngOnInit() {
-    this.userService.getUsers().subscribe((data: any) => {
+    this.userService.getUsers().subscribe((data: TUser[]) => {
       this.users = data;
     });
   }
