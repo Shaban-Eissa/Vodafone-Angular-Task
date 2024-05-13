@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 import { TComment, TPost } from "../../utils/types";
 import { PostService } from "../../services/post/post-service.service";
+import { POST_BODY_IMAGE_URL } from "../../utils/constants";
 
 @Component({
   selector: "app-post-details",
@@ -15,6 +16,7 @@ import { PostService } from "../../services/post/post-service.service";
 export class PostDetailsComponent implements OnInit {
   post?: TPost;
   comments: TComment[] = [];
+  // postBodyImageURL = POST_BODY_IMAGE_URL
 
   constructor(
     private route: ActivatedRoute,
