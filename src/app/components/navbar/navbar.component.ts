@@ -13,6 +13,7 @@ import { UserService } from "../../services/user/user-service.service";
 })
 export class NavbarComponent implements OnInit {
   users: TUser[] = [];
+  selectedUserId: number | null = null;
   @Output() userSelected = new EventEmitter<number>();
 
   constructor(private userService: UserService) {}
@@ -24,10 +25,14 @@ export class NavbarComponent implements OnInit {
   fetchUsers(): void {
     this.userService.getUsers().subscribe((data: TUser[]) => {
       this.users = data;
+      if (this.users.length > 0) {
+        this.selectUser(this.users[0].id);
+      }
     });
   }
 
   selectUser(userId: number): void {
+    this.selectedUserId = userId;
     this.userSelected.emit(userId);
   }
 }

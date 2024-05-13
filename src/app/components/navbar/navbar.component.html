@@ -1,5 +1,10 @@
 <div class="navbar">
-  <a class="nav-item" *ngFor="let user of users" (click)="selectUser(user.id)">
+  <a
+    class="nav-item"
+    *ngFor="let user of users"
+    [class.selected]="user.id === selectedUserId"
+    (click)="selectUser(user.id)"
+  >
     {{ user.name }}
   </a>
 </div>
