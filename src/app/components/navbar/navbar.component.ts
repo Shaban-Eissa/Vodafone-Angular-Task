@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { NgFor } from "@angular/common";
 
-import { UserService } from "../../services/User/user-service.service";
+import { UserService } from "../../services/user/user-service.service";
 import { TUser } from "../../utils/types";
 
 @Component({
