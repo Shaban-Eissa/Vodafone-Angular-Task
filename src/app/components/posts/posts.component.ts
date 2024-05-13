@@ -1,12 +1,12 @@
-import { NgClass, NgFor, NgIf } from "@angular/common";
 import { Component } from "@angular/core";
+import { NgClass, NgFor, NgIf } from "@angular/common";
 
-import { LimitCharactersPipe } from "../../pipes/limit-characters.pipe";
 import { PostService } from "../../services/post/post-service.service";
+import { LimitCharactersPipe } from "../../pipes/limit-characters.pipe";
 
-import { postProfileImageURL, postBodyImageURL } from "../../utils/constants";
 import { TComment, TPost, TUser } from "../../utils/types";
 import { resetComments, setComments } from "../../utils/comments";
+import { postProfileImageURL, postBodyImageURL } from "../../utils/constants";
 
 @Component({
   selector: "app-posts",
@@ -34,7 +34,7 @@ export class PostsComponent {
 
   loadPosts(userId: number): void {
     this.isLoading = true;
-    this.postService.getPosts(userId).subscribe((posts) => {
+    this.postService.getUserPosts(userId).subscribe((posts) => {
       this.posts = posts;
       posts.forEach((post: TPost) => {
         this.postService.getUser(post.userId).subscribe((user: TUser) => {
@@ -49,7 +49,7 @@ export class PostsComponent {
     if (this.showComments && this.selectedPostId === postId) {
       Object.assign(this, resetComments());
     } else {
-      this.postService.getComments(postId).subscribe((data) => {
+      this.postService.getCommentsForUserPost(postId).subscribe((data) => {
         Object.assign(this, setComments(data, postId));
       });
     }

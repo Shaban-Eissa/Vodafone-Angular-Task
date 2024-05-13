@@ -1,11 +1,11 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 import { Observable, of } from "rxjs";
 import { shareReplay, tap } from "rxjs/operators";
 
-import { USERS_URL } from "../../utils/constants";
 import { TUser } from "../../utils/types";
+import { USERS_URL } from "../../utils/constants";
 
 @Injectable({
   providedIn: "root",

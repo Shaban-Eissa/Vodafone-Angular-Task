@@ -4,5 +4,6 @@ export const USERS_URL = "https://jsonplaceholder.typicode.com/users";
 
 export const postProfileImageURL =
   "https://source.unsplash.com/random/200x200?face&sig=";
+
 export const postBodyImageURL =
   "https://source.unsplash.com/random/800x600?nature,landscape&sig=";

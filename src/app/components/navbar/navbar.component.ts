@@ -1,8 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 import { NgFor } from "@angular/common";
+import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 
-import { UserService } from "../../services/user/user-service.service";
 import { TUser } from "../../utils/types";
+import { UserService } from "../../services/user/user-service.service";
 
 @Component({
   selector: "app-navbar",
