@@ -54,4 +54,18 @@ export class PostService {
       );
     }
   }
+
+  getPost(postId: number): Observable<TPost> {
+    const post = localStorage.getItem(`post-${postId}`);
+    if (post) {
+      return of(JSON.parse(post) as TPost);
+    } else {
+      return this.http.get<TPost>(`${POSTS_URL}/${postId}`).pipe(
+        tap((data) =>
+          localStorage.setItem(`post-${postId}`, JSON.stringify(data))
+        ),
+        shareReplay(1)
+      );
+    }
+  }
 }

@@ -23,19 +23,9 @@
       <p>{{ post.body | limitCharacters : 100 }}</p>
     </div>
     <div class="post-footer">
-      <button class="show-Comments" (click)="loadComments(post.id)">
-        {{ selectedPostId === post.id ? "Hide comments" : "Show comments" }}
+      <button (click)="showPostDetails(post.id)" class="show-Comments">
+        Show Comments
       </button>
-      <div class="comments-parent-container">
-        <ng-container *ngIf="post.id === selectedPostId">
-          <div
-            class="comment-item"
-            *ngFor="let comment of selectedPostComments"
-          >
-            <p class="comment-body">{{ comment.body }}</p>
-          </div>
-        </ng-container>
-      </div>
     </div>
   </div>
 </div>

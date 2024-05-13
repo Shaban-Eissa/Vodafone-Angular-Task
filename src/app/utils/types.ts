@@ -4,6 +4,7 @@ export type TPost = {
   title: string;
   body: string;
   user?: TUser;
+  comments?: TComment[];
 };
 
 export type TComment = {

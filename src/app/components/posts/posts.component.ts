@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Router, RouterModule } from "@angular/router";
 import { NgClass, NgFor, NgIf } from "@angular/common";
 
 import { PostService } from "../../services/post/post-service.service";
@@ -6,30 +7,41 @@ import { LimitCharactersPipe } from "../../pipes/limit-characters.pipe";
 
 import { TComment, TPost, TUser } from "../../utils/types";
 import { resetComments, setComments } from "../../utils/comments";
-import { postProfileImageURL, postBodyImageURL } from "../../utils/constants";
+
+import {
+  POST_PROFILE_IMAGE_URL,
+  POST_BODY_IMAGE_URL,
+} from "../../utils/constants";
 
 @Component({
   selector: "app-posts",
   standalone: true,
-  imports: [NgFor, NgIf, LimitCharactersPipe, NgClass],
+  imports: [NgFor, NgIf, NgClass, LimitCharactersPipe, RouterModule],
   templateUrl: "./posts.component.html",
   styleUrl: "./posts.component.scss",
 })
 export class PostsComponent {
   posts: TPost[] = [];
-  postProfileImageURL = postProfileImageURL;
-  postBodyImageURL = postBodyImageURL;
   comments: TComment[] = [];
-  selectedPostComments: any[] = [];
+
+  postProfileImageURL = POST_PROFILE_IMAGE_URL;
+  postBodyImageURL = POST_BODY_IMAGE_URL;
+
+  selectedPostComments: TComment[] = [];
   selectedPostId: number | null = null;
   selectedCardId: number | null = null;
-  showComments = false;
-  isLoading = true;
 
-  constructor(private postService: PostService) {}
+  isLoading = true;
+  showComments = false;
+
+  constructor(private router: Router, private postService: PostService) {}
 
   ngOnInit() {
     this.loadPosts(1);
+  }
+
+  showPostDetails(postId: number): void {
+    this.router.navigate(["/post", postId]);
   }
 
   loadPosts(userId: number): void {
