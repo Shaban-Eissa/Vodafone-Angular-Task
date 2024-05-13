@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  selectUser(userId: number) {
+  selectUser(userId: number): void {
     this.userSelected.emit(userId);
   }
 }

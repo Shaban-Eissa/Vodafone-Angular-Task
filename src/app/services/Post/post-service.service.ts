@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
-import { of } from "rxjs";
+import { Observable, of } from "rxjs";
 import { shareReplay, tap } from "rxjs/operators";
 
 import { POSTS_URL, COMMENTS_URL, USERS_URL } from "../../utils/constants";
@@ -13,7 +13,7 @@ import { TPost, TComment, TUser } from "../../utils/types";
 export class PostService {
   constructor(private http: HttpClient) {}
 
-  getPosts(userId: number) {
+  getPosts(userId: number): Observable<TPost[]> {
     const posts = localStorage.getItem(`posts-${userId}`);
     if (posts) {
       return of(JSON.parse(posts) as TPost[]);
@@ -27,7 +27,7 @@ export class PostService {
     }
   }
 
-  getComments(postId: number) {
+  getComments(postId: number): Observable<TComment[]> {
     const comments = localStorage.getItem(`comments-${postId}`);
     if (comments) {
       return of(JSON.parse(comments) as TComment[]);
@@ -41,7 +41,7 @@ export class PostService {
     }
   }
 
-  getUser(userId: number) {
+  getUser(userId: number): Observable<TUser> {
     const user = localStorage.getItem(`user-${userId}`);
     if (user) {
       return of(JSON.parse(user) as TUser);

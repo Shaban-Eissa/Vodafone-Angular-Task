@@ -6,6 +6,7 @@ import { PostService } from "../../services/Post/post-service.service";
 
 import { postProfileImageURL, postBodyImageURL } from "../../utils/constants";
 import { TComment, TPost, TUser } from "../../utils/types";
+import { resetComments, setComments } from "../../utils/comments";
 
 @Component({
   selector: "app-posts",
@@ -31,7 +32,7 @@ export class PostsComponent {
     this.loadPosts(1);
   }
 
-  loadPosts(userId: number) {
+  loadPosts(userId: number): void {
     this.isLoading = true;
     this.postService.getPosts(userId).subscribe((posts) => {
       this.posts = posts;
@@ -44,18 +45,12 @@ export class PostsComponent {
     });
   }
 
-  loadComments(postId: number) {
+  loadComments(postId: number): void {
     if (this.showComments && this.selectedPostId === postId) {
-      this.showComments = false;
-      this.selectedPostId = null;
-      this.selectedPostComments = [];
-      this.selectedCardId = null;
+      Object.assign(this, resetComments());
     } else {
       this.postService.getComments(postId).subscribe((data) => {
-        this.selectedPostComments = data;
-        this.selectedPostId = postId;
-        this.showComments = true;
-        this.selectedCardId = postId;
+        Object.assign(this, setComments(data, postId));
       });
     }
   }

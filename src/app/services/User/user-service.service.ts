@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
-import { of } from "rxjs";
+import { Observable, of } from "rxjs";
 import { shareReplay, tap } from "rxjs/operators";
 
 import { USERS_URL } from "../../utils/constants";
@@ -18,7 +18,7 @@ export class UserService {
     shareReplay(1)
   );
 
-  getUsers() {
+  getUsers(): Observable<TUser[]> {
     const users = localStorage.getItem("users");
     if (users) {
       return of(JSON.parse(users) as TUser[]);
