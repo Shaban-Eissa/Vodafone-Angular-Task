@@ -14,6 +14,7 @@ import { UserService } from "../../services/user/user-service.service";
 export class NavbarComponent implements OnInit {
   users: TUser[] = [];
   selectedUserId: number | null = null;
+
   @Output() userSelected = new EventEmitter<number>();
 
   constructor(private userService: UserService) {}

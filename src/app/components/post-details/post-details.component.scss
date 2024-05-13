@@ -1,5 +1,5 @@
 .post-details {
-  max-width: 90%;
+  max-width: 70%;
   margin: 0 auto;
   padding: 20px;
   font-family: "Merriweather", "Georgia", serif;
@@ -15,25 +15,47 @@
   }
 
   @media (min-width: 992px) {
-    max-width: 960px;
+    max-width: 800px;
   }
 
   h2 {
     margin-bottom: 20px;
-    font-size: 2em;
+    font-size: 0.9em;
     font-weight: 700;
 
     @media (min-width: 576px) {
-      font-size: 2.2em;
+      font-size: 1.5em;
     }
 
     @media (min-width: 768px) {
-      font-size: 2.5em;
+      font-size: 2em;
     }
   }
 
-  p {
+  .post-image {
+    height: 150px;
     margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 15px 15px rgba(46, 46, 46, 0.1);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (min-width: 576px) {
+      height: 240px;
+    }
+
+    @media (min-width: 768px) {
+      height: 300px;
+    }
+  }
+
+  .post-body {
+    margin-bottom: 80px;
     font-size: 1em;
 
     @media (min-width: 576px) {
@@ -46,26 +68,45 @@
   }
 
   .comments {
-    margin-top: 50px;
     border-top: 1px solid #ddd;
     padding-top: 20px;
   }
 
   .comment {
-    margin-bottom: 20px;
-  }
+    margin-bottom: 50px;
 
-  .comment h4 {
-    margin-bottom: 10px;
-    font-size: 1.2em;
-    font-weight: 700;
-
-    @media (min-width: 576px) {
-      font-size: 1.3em;
+    .comment-body {
+      margin-top: 10px;
+      line-height: 1.6;
+      font-size: medium;
     }
 
-    @media (min-width: 768px) {
-      font-size: 1.4em;
+    .comment-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      img {
+        margin-right: 10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+
+      .comment-header-info {
+        display: flex;
+        flex-direction: column;
+        font-size: 10px;
+        color: #8d8d8d;
+
+        @media (min-width: 576px) {
+          font-size: 14px;
+        }
+
+        @media (min-width: 768px) {
+          font-size: 15px;
+        }
+      }
     }
   }
 
