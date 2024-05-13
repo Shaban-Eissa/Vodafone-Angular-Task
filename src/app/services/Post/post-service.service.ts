@@ -4,6 +4,8 @@ import { HttpClient } from "@angular/common/http";
 import { of } from "rxjs";
 import { shareReplay, tap } from "rxjs/operators";
 
+import { POSTS_URL, COMMENTS_URL, USERS_URL } from "../../utils/constants";
+
 @Injectable({
   providedIn: "root",
 })
@@ -15,16 +17,12 @@ export class PostService {
     if (posts) {
       return of(JSON.parse(posts));
     } else {
-      return this.http
-        .get<any[]>(
-          `https://jsonplaceholder.typicode.com/posts?userId=${userId}`
-        )
-        .pipe(
-          tap((data) =>
-            localStorage.setItem(`posts-${userId}`, JSON.stringify(data))
-          ),
-          shareReplay(1)
-        );
+      return this.http.get<any[]>(`${POSTS_URL}?userId=${userId}`).pipe(
+        tap((data) =>
+          localStorage.setItem(`posts-${userId}`, JSON.stringify(data))
+        ),
+        shareReplay(1)
+      );
     }
   }
 
@@ -33,16 +31,12 @@ export class PostService {
     if (comments) {
       return of(JSON.parse(comments));
     } else {
-      return this.http
-        .get<any[]>(
-          `https://jsonplaceholder.typicode.com/comments?postId=${postId}`
-        )
-        .pipe(
-          tap((data) =>
-            localStorage.setItem(`comments-${postId}`, JSON.stringify(data))
-          ),
-          shareReplay(1)
-        );
+      return this.http.get<any[]>(`${COMMENTS_URL}?postId=${postId}`).pipe(
+        tap((data) =>
+          localStorage.setItem(`comments-${postId}`, JSON.stringify(data))
+        ),
+        shareReplay(1)
+      );
     }
   }
 
@@ -51,14 +45,12 @@ export class PostService {
     if (user) {
       return of(JSON.parse(user));
     } else {
-      return this.http
-        .get<any>(`https://jsonplaceholder.typicode.com/users/${userId}`)
-        .pipe(
-          tap((data) =>
-            localStorage.setItem(`user-${userId}`, JSON.stringify(data))
-          ),
-          shareReplay(1)
-        );
+      return this.http.get<any>(`${USERS_URL}/${userId}`).pipe(
+        tap((data) =>
+          localStorage.setItem(`user-${userId}`, JSON.stringify(data))
+        ),
+        shareReplay(1)
+      );
     }
   }
 }
