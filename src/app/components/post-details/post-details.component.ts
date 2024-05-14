@@ -1,3 +1,4 @@
+import { EMPTY, catchError } from "rxjs";
 import { NgFor, NgIf } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -29,22 +30,51 @@ export class PostDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.initializePostDetails();
+  }
+
+  initializePostDetails(): void {
     const userId = this.route.snapshot.paramMap.get("userid");
     const postId = this.route.snapshot.paramMap.get("postid");
     if (userId !== null && postId !== null) {
       this.userId = +userId;
       this.loadPostAndComments(Number(postId));
     }
+
+    this.route.params.subscribe((params) => {
+      this.postService.getPost(+params["postid"]).subscribe(
+        (post) => {
+          // Handle the post data here
+        },
+        (error) => {
+          if (error.message === "Post not found") {
+            this.router.navigate(["**"]);
+          }
+        }
+      );
+    });
   }
 
   loadPostAndComments(postId: number): void {
-    this.postService.getPost(postId).subscribe((post) => {
-      this.post = post;
+    this.postService
+      .getPost(postId)
+      .pipe(
+        catchError((error) => {
+          if (error.message === "Not Found") {
+            this.router.navigate(["not-found"]);
+          }
+          return EMPTY;
+        })
+      )
+      .subscribe((post) => {
+        this.post = post;
 
-      this.postService.getCommentsForUserPost(postId).subscribe((comments) => {
-        this.comments = comments;
+        this.postService
+          .getCommentsForUserPost(postId)
+          .subscribe((comments) => {
+            this.comments = comments;
+          });
       });
-    });
   }
 
   goBack(): void {

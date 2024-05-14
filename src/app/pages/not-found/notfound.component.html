@@ -1,0 +1,14 @@
+<div class="not-found">
+  <div class="background">
+    <img [src]="notFoundBackgroundImageURL" alt="Not Found" />
+  </div>
+  <img [src]="notFoundImageURL" alt="Not Found" />
+  <p>
+    Oops! It seems like you've taken a wrong turn. The page you are looking for
+    does not exist or may have been moved. Don't worry though, we can help you
+    get back on track. Click the button below to return to the homepage and
+    continue browsing.
+  </p>
+
+  <button (click)="navigateHome()">Go Home</button>
+</div>

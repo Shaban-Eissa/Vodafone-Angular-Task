@@ -5,6 +5,7 @@ import { Router, RouterModule, ActivatedRoute } from "@angular/router";
 import { TComment, TPost, TUser } from "../../utils/types";
 
 import { PostService } from "../../services/post/post-service.service";
+import { UserService } from "../../services/user/user-service.service";
 
 import { LimitCharactersPipe } from "../../pipes/limit-characters.pipe";
 
@@ -35,6 +36,7 @@ export class PostsComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private userService: UserService,
     private postService: PostService
   ) {}
 
@@ -45,21 +47,27 @@ export class PostsComponent {
     });
   }
 
-  showPostDetails(postId: number): void {
-    this.router.navigate(["/user", this.selectedUserId, "post", postId]);
-  }
-
   loadPosts(userId: number): void {
     this.selectedUserId = userId;
     this.isLoading = true;
-    this.postService.getUserPosts(userId).subscribe((posts) => {
-      this.posts = posts;
-      posts.forEach((post: TPost) => {
-        this.postService.getUser(post.userId).subscribe((user: TUser) => {
-          post.user = user;
-          this.isLoading = false;
+    this.postService.getUserPosts(userId).subscribe(
+      (posts) => {
+        this.posts = posts;
+        posts.forEach((post: TPost) => {
+          this.userService.getUser(post.userId).subscribe((user: TUser) => {
+            post.user = user;
+            this.isLoading = false;
+          });
         });
-      });
-    });
+      },
+      (error) => {
+        console.error("Error loading posts:", error);
+        this.isLoading = false;
+      }
+    );
+  }
+
+  showPostDetails(postId: number): void {
+    this.router.navigate(["/user", this.selectedUserId, "post", postId]);
   }
 }
