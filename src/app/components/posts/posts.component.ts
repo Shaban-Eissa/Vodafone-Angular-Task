@@ -1,12 +1,12 @@
 import { Component } from "@angular/core";
-import { Router, RouterModule } from "@angular/router";
 import { NgClass, NgFor, NgIf } from "@angular/common";
-
-import { PostService } from "../../services/post/post-service.service";
-import { LimitCharactersPipe } from "../../pipes/limit-characters.pipe";
+import { Router, RouterModule, ActivatedRoute } from "@angular/router";
 
 import { TComment, TPost, TUser } from "../../utils/types";
-import { resetComments, setComments } from "../../utils/comments";
+
+import { PostService } from "../../services/post/post-service.service";
+
+import { LimitCharactersPipe } from "../../pipes/limit-characters.pipe";
 
 import {
   POST_PROFILE_IMAGE_URL,
@@ -21,30 +21,36 @@ import {
   styleUrl: "./posts.component.scss",
 })
 export class PostsComponent {
+  isLoading = true;
+
   posts: TPost[] = [];
   comments: TComment[] = [];
 
-  postProfileImageURL = POST_PROFILE_IMAGE_URL;
   postBodyImageURL = POST_BODY_IMAGE_URL;
+  postProfileImageURL = POST_PROFILE_IMAGE_URL;
 
+  selectedUserId: number = 0;
   selectedPostComments: TComment[] = [];
-  selectedPostId: number | null = null;
-  selectedCardId: number | null = null;
 
-  isLoading = true;
-  showComments = false;
-
-  constructor(private router: Router, private postService: PostService) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private postService: PostService
+  ) {}
 
   ngOnInit() {
-    this.loadPosts(1);
+    this.route.params.subscribe((params) => {
+      this.selectedUserId = +params["userid"];
+      this.loadPosts(this.selectedUserId);
+    });
   }
 
   showPostDetails(postId: number): void {
-    this.router.navigate(["/post", postId]);
+    this.router.navigate(["/user", this.selectedUserId, "post", postId]);
   }
 
   loadPosts(userId: number): void {
+    this.selectedUserId = userId;
     this.isLoading = true;
     this.postService.getUserPosts(userId).subscribe((posts) => {
       this.posts = posts;
@@ -55,15 +61,5 @@ export class PostsComponent {
         });
       });
     });
-  }
-
-  loadComments(postId: number): void {
-    if (this.showComments && this.selectedPostId === postId) {
-      Object.assign(this, resetComments());
-    } else {
-      this.postService.getCommentsForUserPost(postId).subscribe((data) => {
-        Object.assign(this, setComments(data, postId));
-      });
-    }
   }
 }

@@ -1,4 +1,5 @@
 import { NgFor } from "@angular/common";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 
 import { TUser } from "../../utils/types";
@@ -17,17 +18,22 @@ export class NavbarComponent implements OnInit {
 
   @Output() userSelected = new EventEmitter<number>();
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.fetchUsers();
   }
 
   fetchUsers(): void {
+    const userId = this.route.snapshot.paramMap.get("userid");
     this.userService.getUsers().subscribe((data: TUser[]) => {
       this.users = data;
       if (this.users.length > 0) {
-        this.selectUser(this.users[0].id);
+        this.selectUser(userId ? +userId : this.users[0].id);
       }
     });
   }
@@ -35,5 +41,6 @@ export class NavbarComponent implements OnInit {
   selectUser(userId: number): void {
     this.selectedUserId = userId;
     this.userSelected.emit(userId);
+    this.router.navigate(["/user", userId]);
   }
 }

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 
 import { TComment, TPost } from "../../utils/types";
 import { POST_BODY_IMAGE_URL } from "../../utils/constants";
+
 import { PostService } from "../../services/post/post-service.service";
 
 @Component({
@@ -19,32 +20,34 @@ export class PostDetailsComponent implements OnInit {
 
   postBodyImageURL = POST_BODY_IMAGE_URL;
 
+  userId: number | null = null;
+
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
+    private route: ActivatedRoute,
     private postService: PostService
   ) {}
 
   ngOnInit() {
-    this.loadPostAndComments();
-  }
-
-  loadPostAndComments(): void {
-    const postId = this.route.snapshot.paramMap.get("id");
-    if (postId !== null) {
-      this.postService.getPost(Number(postId)).subscribe((post) => {
-        this.post = post;
-
-        this.postService
-          .getCommentsForUserPost(Number(postId))
-          .subscribe((comments) => {
-            this.comments = comments;
-          });
-      });
+    const userId = this.route.snapshot.paramMap.get("userid");
+    const postId = this.route.snapshot.paramMap.get("postid");
+    if (userId !== null && postId !== null) {
+      this.userId = +userId;
+      this.loadPostAndComments(Number(postId));
     }
   }
 
+  loadPostAndComments(postId: number): void {
+    this.postService.getPost(postId).subscribe((post) => {
+      this.post = post;
+
+      this.postService.getCommentsForUserPost(postId).subscribe((comments) => {
+        this.comments = comments;
+      });
+    });
+  }
+
   goBack(): void {
-    this.router.navigate(["/"]);
+    this.router.navigate(["/user", this.userId]);
   }
 }
