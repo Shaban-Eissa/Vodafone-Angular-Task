@@ -21,10 +21,10 @@ Demo built with Angular for data-fetching and caching for api's with RxJS.
 
 ## Demo
 
-<img src="https://github.com/Shaban-Eissa/Vodafone-Angular-Task/assets/49924090/b2f0f395-47c1-492d-af6e-9082f778c40b" width="950" height="450" />
-<img src="https://github.com/Shaban-Eissa/Vodafone-Angular-Task/assets/49924090/d5d950fb-b078-40da-8d36-eba256accf5a" width="950" height="450" />
-<img src="https://github.com/Shaban-Eissa/Vodafone-Angular-Task/assets/49924090/586c0f59-550b-487c-8bec-d3e257e04ea8" width="950" height="450" />
-<img src="https://github.com/Shaban-Eissa/Vodafone-Angular-Task/assets/49924090/1ed6ffa3-9103-4fbe-b1b8-2455febbfc1a" width="950" height="450" />
+<img src="https://github.com/Shaban-Eissa/Vodafone-Angular-Task/assets/49924090/b2f0f395-47c1-492d-af6e-9082f778c40b" width="950" height="420" />
+<img src="https://github.com/Shaban-Eissa/Vodafone-Angular-Task/assets/49924090/d5d950fb-b078-40da-8d36-eba256accf5a" width="950" height="420" />
+<img src="https://github.com/Shaban-Eissa/Vodafone-Angular-Task/assets/49924090/586c0f59-550b-487c-8bec-d3e257e04ea8" width="950" height="420" />
+<img src="https://github.com/Shaban-Eissa/Vodafone-Angular-Task/assets/49924090/1ed6ffa3-9103-4fbe-b1b8-2455febbfc1a" width="950" height="420" />
 
 
 ## Installation
