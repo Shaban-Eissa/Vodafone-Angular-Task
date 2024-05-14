@@ -22,6 +22,11 @@ Demo built with Angular for data-fetching and caching for api's with RxJS.
 ## Demo
 
 <img src="https://github.com/Shaban-Eissa/Vodafone-Angular-Task/assets/49924090/01961e92-fca2-4be3-bb2e-3e4206e2d594" width="950" height="450" />
+<br />
+<br />
+<img src="https://github.com/Shaban-Eissa/Vodafone-Angular-Task/assets/49924090/c5cf3532-212c-4d32-bb33-0382606e12bb" width="950" height="450" />
+
+
 
 
 ## Installation
